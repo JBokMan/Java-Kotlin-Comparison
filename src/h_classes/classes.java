@@ -5,5 +5,8 @@ public class classes {
         var user = new JavaUserRecord("Alice", "+49-012345678910");
         System.out.println(user.name());
         System.out.println(user.phoneNumber());
+
+        var user2 = new JavaUserRegularClass("Bob", "+49-012345678910");
+        user2.printUser();
     }
 }
