@@ -52,3 +52,9 @@ fun ifAsExpression1(arg: String?): Int {
     }
     return length
 }
+
+// Do not use!
+fun banksOfShame(arg: String?): Int {
+    check(arg != null, { "arg must not be null" })
+    return arg.length
+}
