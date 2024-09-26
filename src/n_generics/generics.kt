@@ -8,8 +8,23 @@ fun main(args: Array<String>) {
     println(box.value)
     println(box2.value)
     println(box3.value)
+
+    val list = singletonList("Hello")
+    println(list)
+
+    val basicToString = 1.basicToString()
+    println(basicToString)
 }
 
 class Box<T>(t: T) {
     val value = t
+}
+
+
+fun <T> singletonList(item: T): List<T> {
+    return listOf(item)
+}
+
+fun <T> T.basicToString(): String {
+    return "Value: $this"
 }

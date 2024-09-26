@@ -41,5 +41,4 @@ class KotlinUserRegularClass(private val name: String, private val phoneNumber: 
     fun overloadedFunctionSuperTypeParameter(foo: Any) {
         println("Overloaded function with one parameter: $foo")
     }
-
 }
