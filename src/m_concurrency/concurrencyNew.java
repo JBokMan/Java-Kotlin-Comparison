@@ -1,37 +1,33 @@
 import m_concurrency.WeatherData;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import static m_concurrency.ConcurrencyKt.parseWeatherData;
 
 void main() {
     List<String> cities = List.of("New York", "London", "Paris", "Rome", "Madrid", "Vienna", "Moscow");
 
-    // CompletableFuture to print every second
-    CompletableFuture<Void> timerFuture = CompletableFuture.runAsync(() -> {
-        for (int i = 1; i <= 10; i++) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    // VirtualThread to print every second
+    Thread timerThread = Thread.ofVirtual().start(() -> {
+        try {
+            for (int i = 1; i <= 10; i++) {
+                Thread.sleep(1000);
+                System.out.println(i + " seconds passed");
             }
-            System.out.println(STR."\{i} seconds passed");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     });
 
     updateWeatherUI(cities);
 
     try {
-        timerFuture.get();
-    } catch (InterruptedException | ExecutionException e) {
+        timerThread.join();
+    } catch (InterruptedException e) {
         e.printStackTrace();
     }
 }
 
-public static class WeatherFetcher {
+public static class WeatherFetcher implements Runnable {
     private final String location;
     private final WeatherDataListener listener;
 
@@ -40,17 +36,16 @@ public static class WeatherFetcher {
         this.listener = listener;
     }
 
-    public CompletableFuture<Void> fetch() {
-        return CompletableFuture.runAsync(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            String data = STR."Weather data for \{location}";
-            WeatherData weatherData = parseWeatherData(data);
-            listener.onDataFetched(weatherData);
-        });
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        String data = "Weather data for " + location;
+        WeatherData weatherData = parseWeatherData(data);
+        listener.onDataFetched(weatherData);
     }
 }
 
@@ -59,7 +54,7 @@ public interface WeatherDataListener {
 }
 
 public void updateWeatherUI(List<String> locations) {
-    List<CompletableFuture<Void>> futures = new ArrayList<>();
+    List<Thread> threads = new ArrayList<>();
     List<WeatherData> weatherDataList = new ArrayList<>();
 
     for (String location : locations) {
@@ -68,18 +63,20 @@ public void updateWeatherUI(List<String> locations) {
                 weatherDataList.add(data);
                 if (weatherDataList.size() == locations.size()) {
                     System.out.println();
-                    System.out.println(STR."weatherDataList = \{weatherDataList}");
+                    System.out.println("weatherDataList = " + weatherDataList);
                     System.out.println();
                 }
             }
         });
-        futures.add(fetcher.fetch());
+        Thread thread = Thread.ofVirtual().start(fetcher);
+        threads.add(thread);
     }
 
-    CompletableFuture<Void> allOf = CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
-    try {
-        allOf.get();
-    } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
+    for (Thread thread : threads) {
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
