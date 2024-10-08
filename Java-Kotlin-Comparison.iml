@@ -10,5 +10,6 @@
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
     <orderEntry type="library" name="kotlinx-coroutines-core" level="project" />
     <orderEntry type="library" name="kotlinx-coroutines-core-jvm 1.9.0" level="project" />
+    <orderEntry type="library" name="kotlinx-collections-immutable-jvm 0.3.8" level="project" />
   </component>
 </module>
