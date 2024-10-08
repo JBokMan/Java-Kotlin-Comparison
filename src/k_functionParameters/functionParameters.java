@@ -10,6 +10,7 @@ public class functionParameters {
         Consumer<Void> function3 = arg -> System.out.println("Hello");
         Consumer<Object> function4 = arg -> System.out.println(arg);
 
+        // Es gibt auch noch Supplier und andere Typen, die das Interface FunctionalInterface implementieren
         callFunction(function1, function4);
     }
 
