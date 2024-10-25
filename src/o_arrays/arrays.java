@@ -10,8 +10,7 @@ void main() {
 
     Arrays.stream(array0).forEach(System.out::print);
     System.out.println();
-    Arrays.stream(array1).forEach(System.out::print);
-    System.out.println();
+    System.out.println(String.join("", array1));
     Arrays.stream(array2).forEach(System.out::print);
     System.out.println();
     Arrays.stream(array3).forEach(System.out::print);
@@ -23,13 +22,10 @@ void main() {
 
     System.out.println(array1[0]);
 
+    int[][] nestedArray = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}};
 
-    int[][] nestedArray = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-    for (int[] row : nestedArray) {
-        for (int anInt : row) {
-            System.out.print(anInt);
-        }
-        System.out.println();
-    }
-    System.out.println(nestedArray[1][2]);
+    System.out.println(java.util.Arrays.deepToString(nestedArray));
 }

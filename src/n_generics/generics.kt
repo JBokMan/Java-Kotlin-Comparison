@@ -16,9 +16,7 @@ fun main(args: Array<String>) {
     println(basicToString)
 }
 
-class Box<T>(t: T) {
-    val value = t
-}
+class Box<T>(val value: T)
 
 
 fun <T> singletonList(item: T): List<T> {

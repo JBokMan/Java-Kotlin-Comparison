@@ -2,6 +2,7 @@ package m_concurrency
 //"org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0"
 
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -11,14 +12,21 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 
+suspend fun foo() {
+    fetchWeatherData("Berlin")
+}
+
 fun main(args: Array<String>) = runBlocking {
     val cities =
         listOf("Berlin", "Tokyo", "New York", "London", "Paris", "Rome", "Madrid", "Vienna", "Moscow", "Beijing")
 
+
+    fetchWeatherData("Berlin")
+
     val job = CoroutineScope(Dispatchers.Default).launch {
 
-        val deferredData1 = CoroutineScope(Dispatchers.IO).async { fetchWeatherData("Berlin") }
-        println(deferredData1.await())
+        //val deferredData1 = CoroutineScope(Dispatchers.Default).async { fetchWeatherData("Berlin") }
+        //println(deferredData1.await())
 
         val deferredData = cities.map { async { fetchWeatherData(it) } }
 

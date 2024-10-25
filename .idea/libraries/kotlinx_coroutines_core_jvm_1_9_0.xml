@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="kotlinx-coroutines-core-jvm 1.9.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/kotlinx-coroutines-core-jvm 1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/kotlinx-collections-immutable-jvm 0.3.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/kotlinx.collections.immutable v0.3.8.zip!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../libs/Kotlin Coroutines 1.9.0.zip!/kotlinx.coroutines-1.9.0/benchmarks/src/jmh/java" />
+      <root url="jar://$PROJECT_DIR$/../../../../libs/Kotlin Coroutines 1.9.0.zip!/kotlinx.coroutines-1.9.0/benchmarks/src/jmh/java" />
+      <root url="jar://$PROJECT_DIR$/../../../../libs/Kotlin Coroutines 1.9.0.zip!/kotlinx.coroutines-1.9.0/benchmarks/src/jmh/java" />
+      <root url="file://$USER_HOME$/Downloads/kotlinx.coroutines-1.9.0/benchmarks/src/jmh/java" />
+      <root url="file://$USER_HOME$/Downloads/kotlinx.coroutines-1.9.0/kotlinx-coroutines-core" />
+    </SOURCES>
+  </library>
+</component>

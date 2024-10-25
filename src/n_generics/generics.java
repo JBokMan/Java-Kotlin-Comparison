@@ -32,7 +32,7 @@ public static class Box<T> {
 }
 
 public static <T> List<T> singletonList(T item) {
-    return Collections.singletonList(item);
+    return List.of(item);
 }
 
 public static <T> String basicToString(T item) {
